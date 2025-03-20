@@ -17,15 +17,15 @@ jobs:
 
       - name: Set up Git
         run: |
-          git config --global user.name "Aman7723"
-          git config --global user.email "aman.mandloi@newtechfusion.com"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
 
-      - name: Deploy to GitHub Pages (main branch to root)
+      - name: Deploy to GitHub Pages (main branch to gh-pages)
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_branch: gh-pages  # The branch to deploy to
-          folder: ./  # Deploy content from the root folder of the main branch
-          token: ${{ secrets.GH_TOKEN }}  # Automatically provided token
+          github_token: ${{ secrets.GH_TOKEN }}  # Use GitHub's provided token
+          publish_branch: gh-pages  # The branch to deploy to (for main)
+          publish_dir: ./  # Deploy content from the root folder of the main branch
 
   deploy_dev:
     if: github.ref == 'refs/heads/dev'  # Only deploy when pushing to the dev branch
@@ -37,13 +37,12 @@ jobs:
 
       - name: Set up Git
         run: |
-          git config --global user.name "Aman7723"
-          git config --global user.email "aman.mandloi@newtechfusion.com"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
 
-      - name: Deploy to GitHub Pages (dev branch to /dev folder)
+      - name: Deploy to GitHub Pages (dev branch to dev-pages)
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_branch: gh-pages  # The branch to deploy to
-          folder: ./  # Deploy content from the root folder of the dev branch
-          destination_dir: dev  # Deploy to the 'dev' folder on GitHub Pages
-          token: ${{ secrets.GH_TOKEN }}  # Automatically provided token
+          github_token: ${{ secrets.GH_TOKEN }}  # Use GitHub's provided token
+          publish_branch: dev-pages  # The branch to deploy to (for dev)
+          publish_dir: ./  # Deploy content from the root folder of the dev branch
