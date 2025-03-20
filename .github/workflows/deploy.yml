@@ -1,0 +1,27 @@
+name: Deploy static HTML from branches to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to GitHub Pages subfolder
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: .   # assumes static HTML files are at repo root
+          destination_dir: ${{ github.ref_name }} # deploys to subfolder with branch name
+          keep_files: true   # ✅ This keeps existing content and merges new deployments
+          publish_branch: gh-pages
+
+
+         
