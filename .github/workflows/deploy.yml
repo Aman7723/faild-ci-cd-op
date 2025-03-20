@@ -1,48 +1,24 @@
-name: Deploy to GitHub Pages
+name: Deploy static HTML from branches to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Trigger the workflow on pushes to the main branch
-      - dev   # Trigger the workflow on pushes to the dev branch
+      - branch1
+      - branch2
 
 jobs:
-  deploy_main:
-    if: github.ref == 'refs/heads/main'  
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Git
-        run: |
-          git config --global user.name "Aman7723"
-          git config --global user.email "aman.mandloi@newtechfusion.com"
-
-      - name: Deploy to GitHub Pages (main branch to gh-pages)
+      - name: Deploy to GitHub Pages subfolder
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_TOKEN }}  # Use GitHub's provided token
-          publish_branch: gh-pages  # The branch to deploy to (for main)
-          publish_dir: ./  # Deploy content from the root folder of the main branch
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: .   # Assuming your static HTML is in the root of each branch
+          destination_dir: ${{ github.ref_name }} # deploy branch contents to subfolder with branch name
 
-  deploy_dev:
-    if: github.ref == 'refs/heads/dev'  
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Git
-        run: |
-          git config --global user.name "Aman7723"
-          git config --global user.email "aman.mandloi@newtechfusion.com"
-
-      - name: Deploy to GitHub Pages (dev branch to dev-pages)
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GH_TOKEN }}  # Use GitHub's provided token
-          publish_branch: dev-pages  # The branch to deploy to (for dev)
-          publish_dir: ./ # Deploy content from the root folder of the dev branch
+         
