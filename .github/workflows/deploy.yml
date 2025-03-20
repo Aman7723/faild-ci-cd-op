@@ -1,0 +1,49 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on pushes to the main branch
+      - dev   # Trigger the workflow on pushes to the dev branch
+
+jobs:
+  deploy_main:
+    if: github.ref == 'refs/heads/main'  # Only deploy when pushing to the main branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "Aman7723"
+          git config --global user.email "aman.mandloi@newtechfusion.com"
+
+      - name: Deploy to GitHub Pages (main branch to root)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_branch: gh-pages  # The branch to deploy to
+          folder: ./  # Deploy content from the root folder of the main branch
+          token: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided token
+
+  deploy_dev:
+    if: github.ref == 'refs/heads/dev'  # Only deploy when pushing to the dev branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "Aman7723"
+          git config --global user.email "aman.mandloi@newtechfusion.com"
+
+      - name: Deploy to GitHub Pages (dev branch to /dev folder)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_branch: gh-pages  # The branch to deploy to
+          folder: ./  # Deploy content from the root folder of the dev branch
+          destination_dir: dev  # Deploy to the 'dev' folder on GitHub Pages
+          token: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided token
