@@ -8,49 +8,42 @@ on:
 
 jobs:
   deploy_main:
-<<<<<<< HEAD
     if: github.ref == 'refs/heads/main'  # Only deploy when pushing to the main branch
-=======
-    if: github.ref == 'refs/heads/main'  
->>>>>>> 8dc6a5cbf1adadd8d473f8c25d0451e79b55ab4a
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Set up Git
         run: |
           git config --global user.name "Aman7723"
           git config --global user.email "aman.mandloi@newtechfusion.com"
 
-      - name: Deploy to GitHub Pages (main branch to gh-pages)
+      - name: Deploy to GitHub Pages (main branch to root)
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_TOKEN }}  # Use GitHub's provided token
-          publish_branch: gh-pages  # The branch to deploy to (for main)
-          publish_dir: ./  # Deploy content from the root folder of the main branch
+          deploy_branch: gh-pages  # The branch to deploy to
+          folder: ./  # Deploy content from the root folder of the main branch
+          token: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided token
 
   deploy_dev:
-<<<<<<< HEAD
     if: github.ref == 'refs/heads/dev'  # Only deploy when pushing to the dev branch
-=======
-    if: github.ref == 'refs/heads/dev'  
->>>>>>> 8dc6a5cbf1adadd8d473f8c25d0451e79b55ab4a
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Set up Git
         run: |
           git config --global user.name "Aman7723"
           git config --global user.email "aman.mandloi@newtechfusion.com"
 
-      - name: Deploy to GitHub Pages (dev branch to dev-pages)
+      - name: Deploy to GitHub Pages (dev branch to /dev folder)
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_TOKEN }}  # Use GitHub's provided token
-          publish_branch: dev-pages  # The branch to deploy to (for dev)
-          publish_dir: ./ # Deploy content from the root folder of the dev branch
+          deploy_branch: gh-pages  # The branch to deploy to
+          folder: ./  # Deploy content from the root folder of the dev branch
+          destination_dir: dev  # Deploy to the 'dev' folder on GitHub Pages
+          token: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided token
