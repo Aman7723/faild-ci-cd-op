@@ -25,7 +25,7 @@ jobs:
         with:
           deploy_branch: gh-pages  # The branch to deploy to
           folder: ./  # Deploy content from the root folder of the main branch
-          token: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided token
+          token: ${{ secrets.GH_TOKEN }}  # Automatically provided token
 
   deploy_dev:
     if: github.ref == 'refs/heads/dev'  # Only deploy when pushing to the dev branch
@@ -46,4 +46,4 @@ jobs:
           deploy_branch: gh-pages  # The branch to deploy to
           folder: ./  # Deploy content from the root folder of the dev branch
           destination_dir: dev  # Deploy to the 'dev' folder on GitHub Pages
-          token: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided token
+          token: ${{ secrets.GH_TOKEN }}  # Automatically provided token
