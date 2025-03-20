@@ -18,7 +18,10 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: .   # Assuming your static HTML is in the root of each branch
-          destination_dir: ${{ github.ref_name }} # deploy branch contents to subfolder with branch name
+          publish_dir: .   # assumes static HTML files are at repo root
+          destination_dir: ${{ github.ref_name }} # deploys to subfolder with branch name
+          keep_files: true   # ✅ This keeps existing content and merges new deployments
+          publish_branch: gh-pages
+
 
          
