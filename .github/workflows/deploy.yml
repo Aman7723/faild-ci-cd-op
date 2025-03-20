@@ -3,8 +3,8 @@ name: Deploy static HTML from branches to GitHub Pages
 on:
   push:
     branches:
-      - branch1
-      - branch2
+      - main  
+      - dev
 
 jobs:
   deploy:
