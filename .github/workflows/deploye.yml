@@ -8,11 +8,7 @@ on:
 
 jobs:
   deploy_main:
-<<<<<<< HEAD
     if: github.ref == 'refs/heads/main'  # Only deploy when pushing to the main branch
-=======
-    if: github.ref == 'refs/heads/main'  
->>>>>>> 8dc6a5cbf1adadd8d473f8c25d0451e79b55ab4a
     runs-on: ubuntu-latest
 
     steps:
@@ -32,11 +28,7 @@ jobs:
           publish_dir: ./  # Deploy content from the root folder of the main branch
 
   deploy_dev:
-<<<<<<< HEAD
     if: github.ref == 'refs/heads/dev'  # Only deploy when pushing to the dev branch
-=======
-    if: github.ref == 'refs/heads/dev'  
->>>>>>> 8dc6a5cbf1adadd8d473f8c25d0451e79b55ab4a
     runs-on: ubuntu-latest
 
     steps:
